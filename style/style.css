@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    max-width: 960px;
+}
+.gridcontainer {
+    display: flex;
+    flex-direction: column;
+    width: 960px;
+    height: 960px;
+    flex: auto;
+}
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: auto;
+}
+.square {
+    flex: auto;
+    min-width: 15px;
+    min-height: 15px;
+}
+.square:hover {
+    background-color: red;
+}
