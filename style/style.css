@@ -4,12 +4,17 @@
 body {
     max-width: 960px;
 }
+.buttonholder {
+    display: flex;
+    flex:auto;
+}
 .gridcontainer {
     display: flex;
     flex-direction: column;
     width: 960px;
     height: 960px;
     flex: auto;
+    border: 1px solid black;
 }
 .row {
     display: flex;
@@ -18,9 +23,9 @@ body {
 }
 .square {
     flex: auto;
-    min-width: 15px;
-    min-height: 15px;
+    min-width: 5px;
+    min-height: 5px;
 }
 .square:hover {
-    background-color: red;
+    background-color: gray;
 }
