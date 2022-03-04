@@ -1,3 +1,7 @@
+let trigger = false;
+let color = document.getElementById("colorpicker").value;
+let erase = false;
+
 const generateGrid = (nr) => {
     if (nr > 100 || nr < 16 || isNaN(nr)) {
         return alert("Please choose a size between 16-100");
@@ -7,7 +11,6 @@ const generateGrid = (nr) => {
         document.querySelector('.gridcontainer').appendChild(row);
     }
 }
-
 const generateRow = (nr) => {
     const row = document.createElement('div');
     row.classList.add('row');
@@ -15,36 +18,74 @@ const generateRow = (nr) => {
         const square = document.createElement('div');
         square.classList.add('square');
         square.addEventListener('mouseenter', () => {
-            if (trigger) {
+            if (trigger && !erase) {
                 square.style.backgroundColor = `${color}`;
+            } else if (trigger && erase) {
+                square.style.backgroundColor = 'white';
             }
         });
+        square.addEventListener('click', () => {
+            if (!erase) {
+                square.style.backgroundColor = `${color}`;
+            } else if (erase) {
+                square.style.backgroundColor = `white`;
+            }
+        })
+        square.addEventListener('touchmove', () => {
+            if (!erase) {
+                square.style.backgroundColor = `${color}`;
+            } else if (erase) {
+                square.style.backgroundColor = `white`;
+            }
+        })
         row.appendChild(square);
     }
     return row;
 }
-generateGrid(16);
+const colorChange = () => {
+    if (!erase) {
+        this.style.backgroundColor = `${color}`;
+    } else {
+        this.style.backgroundColor = `white`;
+    }
+}
 document.querySelector('#reset').addEventListener('click', () => {
     const container = document.querySelector('.gridcontainer');
     while (container.lastElementChild) {
         container.removeChild(container.lastElementChild);
     }
-    generateGrid(prompt('How many squares do you want? Minimum size is 16, maximum is 100'));
+    generateGrid(document.getElementById("sizeSlider").value);
 })
-let color = '';
-let trigger = false;
-const buttons = document.querySelectorAll('.colorchoice');
-buttons.forEach(button => button.addEventListener('click', () => {
-    let value = button.value;
-    color = value;
-}))
 document.addEventListener('mousedown', () => {
     trigger = true;
 });
 document.addEventListener('mouseup', () => {
     trigger = false;
 })
-/* const squares = document.querySelectorAll('.square');
-squares.forEach(square => square.addEventListener('mouseover', () => {
-    square.style.backgroundColor = "red";
-})) */
+document.addEventListener('touchmove', () => {
+    trigger = true;
+})
+
+
+const rangeSlider = document.getElementById("sizeSlider");
+rangeSlider.addEventListener('input', () => {
+    document.getElementById("sliderindicator").textContent = rangeSlider.value + " x " + rangeSlider.value;
+})
+const colorPicker = document.getElementById("colorpicker");
+colorPicker.addEventListener('input', () => {
+    if (!erase) {
+        color = colorPicker.value;
+    }
+})
+const eraser = document.getElementById('eraser');
+eraser.addEventListener('click', () => {
+    if (erase) {
+        erase = false;
+        eraser.classList.remove('selected');
+    } else {
+        erase = true;
+        eraser.classList.add('selected');
+    };
+})
+
+generateGrid(16);
