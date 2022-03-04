@@ -1,6 +1,7 @@
 let trigger = false;
 let color = document.getElementById("colorpicker").value;
 let erase = false;
+let rainbowToggle = false;
 
 const generateGrid = (nr) => {
     if (nr > 100 || nr < 16 || isNaN(nr)) {
@@ -18,10 +19,12 @@ const generateRow = (nr) => {
         const square = document.createElement('div');
         square.classList.add('square');
         square.addEventListener('mouseenter', () => {
-            if (trigger && !erase) {
+            if (trigger && !erase && !rainbowToggle) {
                 square.style.backgroundColor = `${color}`;
             } else if (trigger && erase) {
                 square.style.backgroundColor = 'white';
+            } else if (trigger && rainbowToggle) {
+                square.style.backgroundColor = rainbowColor();
             }
         });
         square.addEventListener('click', () => {
@@ -29,6 +32,8 @@ const generateRow = (nr) => {
                 square.style.backgroundColor = `${color}`;
             } else if (erase) {
                 square.style.backgroundColor = `white`;
+            } else if (rainbowToggle) {
+                square.style.backgroundColor = rainbowColor();
             }
         })
         square.addEventListener('touchmove', () => {
@@ -36,6 +41,8 @@ const generateRow = (nr) => {
                 square.style.backgroundColor = `${color}`;
             } else if (erase) {
                 square.style.backgroundColor = `white`;
+            } else if (rainbowToggle) {
+                square.style.backgroundColor = rainbowColor();
             }
         })
         row.appendChild(square);
@@ -65,7 +72,12 @@ document.addEventListener('mouseup', () => {
 document.addEventListener('touchmove', () => {
     trigger = true;
 })
-
+const rainbowColor = () => {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return `rgb(${r}, ${g}, ${b})`;
+}
 
 const rangeSlider = document.getElementById("sizeSlider");
 rangeSlider.addEventListener('input', () => {
@@ -85,6 +97,16 @@ eraser.addEventListener('click', () => {
     } else {
         erase = true;
         eraser.classList.add('selected');
+    };
+})
+const rainbow = document.getElementById('rainbow');
+rainbow.addEventListener('click', () => {
+    if (rainbowToggle) {
+        rainbowToggle = false;
+        rainbow.classList.remove('selected');
+    } else {
+        rainbowToggle = true;
+        rainbow.classList.add('selected');
     };
 })
 
