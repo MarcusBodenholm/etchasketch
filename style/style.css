@@ -18,6 +18,12 @@ input {
     width: 100%;
     cursor: pointer;
     font-family: inherit;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#colorpicker {
+    border:none;
+    box-shadow: none;
+    height: 40px;
 }
 button:hover,
 #colorpicker:hover {
@@ -46,6 +52,8 @@ button:hover,
     height: 600px;
     border: 1px solid black;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    touch-action: none;
 }
 .row {
     display: flex;
@@ -59,6 +67,7 @@ button:hover,
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    
 }
 .square:hover {
     background-color: gray;
