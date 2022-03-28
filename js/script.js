@@ -25,7 +25,6 @@ const generateRow = (nr) => {
     return row;
 };
 const colorChange = (e) => {
-    console.log(e);
     if (e.type == 'click') {
         if (!erase && !rainbowToggle) {
             return `${color}`;
