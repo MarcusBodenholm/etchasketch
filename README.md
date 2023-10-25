@@ -2,7 +2,7 @@
 
 A simple etch-a-sketch project using HTML, CSS & JavaScript, as part of the Odin Project. 
 
-**Live preview:** [here](https://shedcape.github.io/etchasketch/)
+**Live preview:** [here](https://marcusbodenholm.github.io/etchasketch/)
 
 ## Built using
 
